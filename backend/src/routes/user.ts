@@ -4,6 +4,8 @@ import * as jwt  from 'jsonwebtoken';
 import prisma from '../index';
 import JWT_PASS from '../config';
 import bcrypt from 'bcrypt';
+import authMiddleware from '../middlewares/authmiddleware';
+import { requstWithUsername } from "../middlewares/authmiddleware";
 
 const router: Router = express.Router();
 
@@ -83,12 +85,41 @@ router.post("/signin", async (req, res) => {
         return res.status(411).json({message:"Invalid password"})
     };
 
-    const token = await jwt.sign(username, JWT_PASS);
-    res.status(200).json({token: "token"});
+    const token = await jwt.sign({username: username}, JWT_PASS, {expiresIn: 60 * 60});
+    res.status(200).json({token: token});
 });
 
 
-router.get("/bulk", async (req, res) => {
+router.get("/bulk", authMiddleware, async (req: requstWithUsername, res) => {
+
+    const filter = req.query.filter || "";
+
+    try {
+        const users = await prisma.user.findMany({
+            where: {
+                OR: [
+                    {firstName: {
+                        equals: filter as string
+                    }},
+                    {lastName : {
+                        equals : filter as string
+                    }}
+                ]
+            }
+        });
+
+        console.log(req.username);
+        res.status(200).json({
+            user: users.map(user => ({
+                id: user.id,
+                username: user.username,
+                firstName: user.firstName,
+                lastName: user.lastName
+            }))
+        })    
+    } catch (error) {
+        res.status(411).json({message: "Error occures"})
+    }
     
 })
 
