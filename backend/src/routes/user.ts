@@ -147,8 +147,14 @@ router.put("/update", authMiddleware, async (req: requestWithUsername, res) => {
     if(!parsed.success){
         return res.status(411).json({message:"Invalid inputs"});
     }
-    
+
     const passedValues = filterNonNullValues(req.body)
+
+    if(passedValues.password){
+        const saltRounds = 10
+        const hashedPassword = await bcrypt.hash(passedValues.password, saltRounds)
+        passedValues.password = hashedPassword;
+    }
 
     const username = req.username;
     try {
