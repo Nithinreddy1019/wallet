@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 
 const Header = () => {
   return (
-    <div className="flex justify-between shadow-[0px_4px_1px_0px_#bee3f8]">
+    <div className="flex justify-between shadow-[0px_4px_1px_0px_#bee3f8] w-full fixed bg-white">
       <Link to={"/"} className="bg-gradient-to-r from-sky-900 via-sky-500 to-gray-800 inline-block text-3xl font-bold text-transparent bg-clip-text py-2 pl-2">Wall-e(t)</Link>
       <div className="flex">
         <div className="flex items-center group relative mr-4">
