@@ -1,5 +1,4 @@
 import './App.css'
-import Header from "./components/Header";
 import { BrowserRouter } from 'react-router-dom';
 import { Routes } from 'react-router-dom';
 import { Route } from 'react-router-dom';
@@ -12,7 +11,6 @@ function App() {
     <>
       
       <BrowserRouter>
-      <Header />
         <Routes>
           <Route path='/' element={<Home />}></Route>
           <Route path="/signup" element={<Signup />}></Route>
