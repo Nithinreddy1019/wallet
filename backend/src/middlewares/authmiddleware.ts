@@ -3,7 +3,7 @@ import * as jwt from "jsonwebtoken";
 import { Request, Response, NextFunction } from "express";
 
 
-export interface requstWithUsername extends Request {
+export interface requestWithUsername extends Request {
     username?: string;
 }
 
@@ -11,7 +11,7 @@ interface jwtPayload {
     username: string
 }
 
-const authMiddleware = async (req: requstWithUsername, res: Response, next: NextFunction) => {
+const authMiddleware = async (req: requestWithUsername, res: Response, next: NextFunction) => {
     const tokenInput = req.headers.authorization;
     if(!tokenInput || !tokenInput.startsWith("Bearer ")){
         return res.status(403).json({message:"Unauthorized"})

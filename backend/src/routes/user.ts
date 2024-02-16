@@ -5,7 +5,7 @@ import prisma from '../index';
 import JWT_PASS from '../config';
 import bcrypt from 'bcrypt';
 import authMiddleware from '../middlewares/authmiddleware';
-import { requstWithUsername } from "../middlewares/authmiddleware";
+import { requestWithUsername } from "../middlewares/authmiddleware";
 
 const router: Router = express.Router();
 
@@ -90,7 +90,7 @@ router.post("/signin", async (req, res) => {
 });
 
 
-router.get("/bulk", authMiddleware, async (req: requstWithUsername, res) => {
+router.get("/bulk", authMiddleware, async (req: requestWithUsername, res) => {
 
     const filter = req.query.filter || "";
 
@@ -120,7 +120,49 @@ router.get("/bulk", authMiddleware, async (req: requstWithUsername, res) => {
     } catch (error) {
         res.status(411).json({message: "Error occures"})
     }
-    
+});
+
+
+const updateSchema = zod.object({
+    password: zod.string().optional(),
+    firstName: zod.string().optional(),
+    lastName: zod.string().optional()
 })
+interface ReqBody {
+    password?: string,
+    firstName?: string,
+    lastName?: string
+}
+function filterNonNullValues(body: ReqBody): Partial<ReqBody> {
+    let result: Partial<ReqBody> = {}
+    for (let key in body){
+        if (body[key as keyof ReqBody] !== undefined && body[key as keyof ReqBody] !== null){
+            result[key as keyof ReqBody] = body[key as keyof ReqBody]
+        };
+    }
+    return result
+};
+router.put("/update", authMiddleware, async (req: requestWithUsername, res) => {
+    const parsed = updateSchema.safeParse(req.body);
+    if(!parsed.success){
+        return res.status(411).json({message:"Invalid inputs"});
+    }
+    
+    const passedValues = filterNonNullValues(req.body)
+
+    const username = req.username;
+    try {
+        const returnRes = await prisma.user.update({
+            where: {
+                username: username
+            },
+            data : {...passedValues}
+        })
+        res.status(200).json({message: "User updated successfully"});
+    } catch (error) {
+        console.log(error);
+        return res.status(411).json({message: "An error occured"});
+    }
+});
 
 export default router;
