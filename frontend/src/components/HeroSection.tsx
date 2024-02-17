@@ -15,7 +15,7 @@ const HeroSection = () => {
   
   return (
     <>
-    <div className="pt-2 flex pl-6 h-full">
+    <div className="pt-2 flex pl-6 h-full bg-sky-50">
       <div className="flex flex-col justify-center h-[100vh]">
         <h1 className="font-bold text-4xl pb-7 underline text-gray-800">About</h1>
         <p className="text-lg py-2 text-gray-800">A small simulation of paytm wallet done in <span className="text-cyan-600 italic font-medium">Typescript</span></p>
