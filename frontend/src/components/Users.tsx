@@ -26,15 +26,17 @@ type userComponentProps = {
 
 const User:React.FC<userComponentProps> = ({firstName, lastName, id}) => {
     return(
-        <div className="flex items-center justify-between mt-2">
-            <div>
+        <div className="flex items-center justify-between mt-2 ">
+            <div className="flex items-center justify-center gap-2">
                 <div className="bg-sky-100 px-2 rounded-full flex flex-col justify-center items-center size-8">
                     {firstName[0].toUpperCase()}
                 </div>
-                {firstName} {lastName}
+                <div>
+                    {firstName} {lastName}
+                </div>
             </div>
             <div>
-                <button>{id}</button>
+                <button className="border rounded-full bg-sky-400 text-white py-2 px-2 mr-1 hover:bg-sky-500 hover:scale-105 transition-all duration-300">Send Money{id}</button>
             </div>
         </div>
     )
