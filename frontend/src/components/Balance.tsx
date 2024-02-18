@@ -6,7 +6,7 @@ type ComponentProps = {
 }
 
 const Balance:React.FC<ComponentProps> = ({amount}) => {
-    const [visibility, setVisibility] = useState(true);
+    const [visibility, setVisibility] = useState(false);
 
     const clickHandler =() => {
         setVisibility(true);

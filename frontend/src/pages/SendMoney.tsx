@@ -2,7 +2,7 @@ const SendMoney = () => {
     return (
         <div className="flex justify-center items-center h-screen p-4">
             <div className="h-fit w-80 flex flex-col rounded-lg p-8 shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
-                <div className="text-3xl font-semibold p-4 flex justify-center">
+                <div className="text-4xl font-semibold p-4 flex justify-center text-green-500">
                     Send Money
                 </div>
                 <div className="pb-4 text-center px-4">
