@@ -6,6 +6,7 @@ import Signup from './pages/Signup';
 import Signin from './pages/Signin';
 import Home from './pages/Home';
 import Dashboard from "./pages/Dashboard";
+import SendMoney from './pages/SendMoney';
 function App() {
 
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/signup" element={<Signup />}></Route>
           <Route path="/signin" element={<Signin />}></Route>
           <Route path="/dashboard" element={<Dashboard />}></Route>
+          <Route path="/sendmoney" element={<SendMoney />}></Route>
         </Routes>
       </BrowserRouter>
     </>
