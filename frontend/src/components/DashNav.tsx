@@ -15,7 +15,7 @@ const DashNav:React.FC<ComponentProps> = ({label}) => {
                     {label}
                 </div>
                 <div className="bg-sky-100 px-2 rounded-full flex flex-col justify-center items-center size-8">
-                    {label[0].toUpperCase()}
+                    {label[0]}
                 </div>
             </div>
         </div>

@@ -99,16 +99,16 @@ router.get("/bulk", authMiddleware, async (req: requestWithUsername, res) => {
             where: {
                 OR: [
                     {firstName: {
-                        equals: filter as string
+                        contains: filter as string
                     }},
                     {lastName : {
-                        equals : filter as string
+                        contains : filter as string
                     }}
                 ]
             }
         });
+        console.log(users);
 
-        console.log(req.username);
         res.status(200).json({
             user: users.map(user => ({
                 id: user.id,

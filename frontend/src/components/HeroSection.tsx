@@ -5,7 +5,6 @@ import { SiTailwindcss } from "react-icons/si";
 import { SiZod } from "react-icons/si";
 import { SiJsonwebtokens } from "react-icons/si";
 import { BiLogoPostgresql } from "react-icons/bi";
-import { SiRecoil } from "react-icons/si";
 import { FaGithub } from "react-icons/fa";
 
 
@@ -29,7 +28,6 @@ const HeroSection = () => {
                 <li className="flex flex-col items-center"> <BiLogoPostgresql className="text-blue-400 size-10"/> SQL</li>
                 <li className="flex flex-col items-center"> <SiJsonwebtokens className="size-10"/> JWT</li>
                 <li className="flex flex-col items-center"> <SiZod className="size-10"/> Zod</li>
-                <li className="flex flex-col items-center"><SiRecoil className="size-10"/>Recoil</li>
             </ul>
         </div>
         <p className="text-red-400 italic pt-4">Please signin to use</p>

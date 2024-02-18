@@ -22,7 +22,7 @@ router.get("/balance", authMiddleware, async (req: requestWithUsername, res) => 
             }
         });   
 
-        res.status(200).json({balance: user?.account?.balance})
+        res.status(200).json({balance: user?.account?.balance, firstName: user?.firstName});  // TODO: remove first name if not necessary
     } catch (error) {
         console.log(error);
         return res.status(411).json({message: "An error occured"});
